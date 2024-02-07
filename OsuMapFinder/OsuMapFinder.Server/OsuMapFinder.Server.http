@@ -1,0 +1,6 @@
+@OsuMapFinder.Server_HostAddress = http://localhost:5244
+
+GET {{OsuMapFinder.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

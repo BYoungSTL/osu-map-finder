@@ -1,10 +1,8 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
-using MongoDB.Bson;
 using OsuMapFinder.Application.Authentication.Models;
 using OsuMapFinder.Application.Interfaces;
-using OsuMapFinder.Data.Entities;
 using OsuMapFinder.Data.Interfaces;
 
 namespace OsuMapFinder.Application.Authentication.Services

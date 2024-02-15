@@ -10,19 +10,21 @@ using OsuMapFinder.Data.CRUDs;
 using OsuMapFinder.Data.Entities;
 using OsuMapFinder.Data.Interfaces;
 using OsuMapFinder.Data.Mappers;
+using OsuMapFinder.Server.Helpers;
+using Refit;
 
 namespace OsuMapFinder.Server
 {
     public class Startup(IConfiguration configuration)
     {
+        private const string DatabaseConfigName = "Database";
+        private const string OsuApiConfigName = "OsuApi";
+        private const string OsuApiUri = "https://osu.ppy.sh/api/v2";
         public IConfiguration Configuration { get; } = configuration;
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
-
-            //Add GetConfiguration(services) with IOptions<T> for configure configs
-            ConfigureEntityMapping();
 
             services.AddMvc();
             services.AddCors(options =>
@@ -30,27 +32,22 @@ namespace OsuMapFinder.Server
                 options.AddPolicy("_origins",
                     policy =>
                     {
+                        //Local server and front-end
                         policy.WithOrigins("http://localhost:5173/",
                             "https://localhost:7107");
                     });
             });
 
-            //Non-editable config for connection database, no using in services (no IOptions<T>)
-            var secOpts = Configuration
-                .GetSection("Database")
-                .Get<DatabaseConfig>();
-
-            services.AddSingleton(new MongoClient(secOpts!.ConnectionString).GetDatabase(secOpts.Name));
-
-            services.AddScoped<IMongoClient, MongoClient>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ILoginAppService, LoginAppService>();
+            GetConfigs(services);
+            ConfigureDatabase(services);
+            AddServices(services);
+            ConfigureOsuApiClient(services);
 
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo(){});
+                c.SwaggerDoc("v1", new OpenApiInfo());
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
@@ -131,6 +128,39 @@ namespace OsuMapFinder.Server
             app.UseHttpsRedirection();
         }
 
+        private static void AddServices(IServiceCollection services)
+        {
+            services.AddScoped<IMongoClient, MongoClient>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILoginAppService, LoginAppService>();
+        }
+
+        private void ConfigureDatabase(IServiceCollection services)
+        {
+            ConfigureEntityMapping();
+
+            //Non-editable config for connection database, no using in services (no IOptions<T>)
+            var secOpts = Configuration
+                .GetSection(DatabaseConfigName)
+                .Get<DatabaseConfig>();
+
+            services.AddSingleton(new MongoClient(secOpts!.ConnectionString).GetDatabase(secOpts.Name));
+        }
+
+        private void GetConfigs(IServiceCollection services)
+        {
+            services.AddKeyedScoped<OsuApiConfig>(Configuration.GetSection(OsuApiConfigName).Get<OsuApiConfig>());
+        }
+
+        private static void ConfigureOsuApiClient(IServiceCollection services)
+        {
+            services
+                .AddRefitClient<IOsuApiClient>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(OsuApiUri))
+                .AddHttpMessageHandler<AuthHandler>();
+
+            services.AddTransient<AuthHandler>();
+        }
         private static void ConfigureEntityMapping()
         {
             Mapper<User>.EntityMapper();

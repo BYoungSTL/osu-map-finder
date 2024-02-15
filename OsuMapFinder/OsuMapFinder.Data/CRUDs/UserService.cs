@@ -1,7 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using OsuMapFinder.Data.Configs;
 using OsuMapFinder.Data.CRUDs.BaseService;
 using OsuMapFinder.Data.Entities;
 using OsuMapFinder.Data.Interfaces;

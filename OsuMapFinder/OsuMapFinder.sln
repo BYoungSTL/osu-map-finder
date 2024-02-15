@@ -4,10 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuMapFinder.Server", "OsuMapFinder.Server\OsuMapFinder.Server.csproj", "{AB811BFB-3D6D-44F7-B8C8-2D16ACF8CD19}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1FFE6889-03CA-45E4-B681-83BC1A40EF0D} = {1FFE6889-03CA-45E4-B681-83BC1A40EF0D}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuMapFinder.Application", "OsuMapFinder.Application\OsuMapFinder.Application.csproj", "{D391F98A-E143-47E8-B82B-1A4B1CEC4DC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuMapFinder.Application", "OsuMapFinder.Application\OsuMapFinder.Application.csproj", "{D391F98A-E143-47E8-B82B-1A4B1CEC4DC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuMapFinder.Data", "OsuMapFinder.Data\OsuMapFinder.Data.csproj", "{1FFE6889-03CA-45E4-B681-83BC1A40EF0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuMapFinder.Data", "OsuMapFinder.Data\OsuMapFinder.Data.csproj", "{1FFE6889-03CA-45E4-B681-83BC1A40EF0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

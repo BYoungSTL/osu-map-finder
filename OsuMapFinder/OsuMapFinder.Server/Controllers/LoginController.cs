@@ -11,9 +11,7 @@ namespace OsuMapFinder.Server.Controllers
     public class LoginController(ILoginAppService loginAppService) : Controller
     {
         [HttpPost]
-        public IActionResult Login(LoginViewModel viewModel)
-        {
-            return Ok(loginAppService.Login(viewModel.Username, viewModel.Password));
-        }
+        public IActionResult Login(LoginViewModel viewModel) 
+            => Ok(loginAppService.Login(viewModel.Username, viewModel.Password));
     }
 }

@@ -1,4 +1,5 @@
-﻿using Refit;
+﻿using OsuMapFinder.Data.DTOs;
+using Refit;
 
 namespace OsuMapFinder.Application.Interfaces
 {
@@ -7,5 +8,11 @@ namespace OsuMapFinder.Application.Interfaces
     {
         [Get("/beatmaps/{beatmap}")]
         Task<string> GetBeatmap(int beatmap);
+
+        [Get("/users/{user}/{mode}")]
+        Task<OsuUserExtendedDTO> GetUserInfo(int user, string? mode = null);
+
+        [Get("/users/{user}/scores/best")]
+        Task<OsuUserScoreDTO[]> GetUserScores(int user);
     }
 }

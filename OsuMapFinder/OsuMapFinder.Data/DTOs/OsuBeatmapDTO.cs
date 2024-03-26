@@ -16,5 +16,9 @@ namespace OsuMapFinder.Data.DTOs
         public double HpDrain { get; set; }
         [JsonPropertyName("url")]
         public string Url { get; set; }
+        [JsonPropertyName("version")]
+        public string Version { get; set; }
+        [JsonPropertyName("beatmapset")]
+        public OsuBeatmapSetDTO Beatmapset { get; set; }
     }
 }

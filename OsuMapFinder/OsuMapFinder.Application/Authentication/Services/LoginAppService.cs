@@ -3,6 +3,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using OsuMapFinder.Application.Authentication.Models;
 using OsuMapFinder.Application.Interfaces;
+using OsuMapFinder.Application.ViewModels;
 using OsuMapFinder.Data.Interfaces;
 
 namespace OsuMapFinder.Application.Authentication.Services

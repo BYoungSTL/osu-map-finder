@@ -7,7 +7,7 @@ namespace OsuMapFinder.Application.Interfaces
     public interface IOsuApiClient
     {
         [Get("/beatmaps/{beatmap}")]
-        Task<string> GetBeatmap(int beatmap);
+        Task<OsuBeatmapDTO> GetBeatmap(int beatmap);
 
         [Get("/users/{user}/{mode}")]
         Task<OsuUserExtendedDTO> GetUserInfo(int user, string? mode = null);

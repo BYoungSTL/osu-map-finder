@@ -1,0 +1,72 @@
+@import '../../../App.scss';
+
+.recommended-maps {
+    @extend .default-container;
+}
+
+.sider {
+    text-align: 'center';
+    line-height: '120px';
+}
+
+.content {
+    background: rgba(38, 38, 44, 0.7);
+    text-align: 'center';
+    min-height: 120;
+    line-height: '120px';
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+}
+
+.beatmap-image {
+    border-radius: 24px;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+}
+
+.image-block {
+    @extend .col-2;
+    flex: 1 0 0%;
+    width: 140px !important;
+    padding: 0;
+}
+
+.beatmapset-col {
+    text-align: left;
+}
+
+.link {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 24px;
+    color: #fff;;
+}
+
+.artist {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    color: #fff;
+}
+
+.data-text {
+    margin: 0 0 5px 0;
+}
+
+.mapper {
+    margin: 0;
+}
+
+.row-extended {
+    @extend .row;
+    margin: 8px;
+    padding: 0;
+}
+
+.bpm {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;;
+}

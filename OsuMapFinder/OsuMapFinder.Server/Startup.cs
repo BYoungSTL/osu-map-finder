@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
@@ -33,8 +33,8 @@ namespace OsuMapFinder.Server
                     policy =>
                     {
                         //Local server and front-end
-                        policy.WithOrigins("http://localhost:5173/",
-                            "https://localhost:7107");
+                        policy.WithOrigins("http://localhost:5173",
+                            "https://localhost:7107").AllowAnyHeader().AllowAnyMethod();
                     });
             });
 
@@ -110,7 +110,7 @@ namespace OsuMapFinder.Server
                 app.UseHsts();
             }
 
-            app.UseCors();
+            app.UseCors("_origins");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
@@ -119,7 +119,7 @@ namespace OsuMapFinder.Server
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}");
+                    pattern: "api/{controller=Home}");
             });
 
             app.UseDefaultFiles();

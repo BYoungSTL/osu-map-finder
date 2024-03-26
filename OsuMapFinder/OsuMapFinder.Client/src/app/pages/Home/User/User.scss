@@ -1,0 +1,43 @@
+@import '../../../App.scss';
+
+.profile {
+    @extend .default-container;
+    margin-bottom: 12px;
+}
+
+.userinfo {
+    display: flex;
+    width: max-content;
+}
+
+.userinfo-col {
+    @extend .col;
+    padding: 5px;
+}
+
+.userinfo-profile {
+    @extend .userinfo-col;
+    width: 140px;
+}
+
+.userinfo-col-data {
+    @extend .userinfo-col;
+    text-align: initial;
+}
+
+.profile-image {
+    border: 0;
+    border-radius: 12px;
+    width: 192px;
+}
+
+.link {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 24px;
+    color: #fff;;
+}
+
+.info {
+    margin-bottom: 0.5rem;
+}
